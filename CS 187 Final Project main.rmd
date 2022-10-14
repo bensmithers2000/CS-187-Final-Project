@@ -12,12 +12,16 @@ knitr::opts_chunk$set(echo = TRUE,
 pacman::p_load(tidyverse)
 # Reading in the data set
 crashes <- read.csv("F_Crash_ChittendenCty_Aug_2019_2021.csv")
-# Changing roof, result, and field into factors:
+# Changing Crash.Type, Collision.Direction, Weather, Time.of.Day and Impairment into factors:
 crashes <-
  crashes |>
- mutate(across(.cols = c(Crash.Type, Collision.Direction, Weather, 
+ mutate(Crash.Date = parse_datetime(Crash.Date, 
+                                    "%B %d, %Y, %I:%M %p"), 
+        across(.cols = c(Crash.Type, Collision.Direction, Weather, 
                          Time.of.Day, Impairment),
- .fns = factor))
+ 
+               .fns = factor))
+
 
 ```
 
