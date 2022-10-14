@@ -6,7 +6,19 @@ date: "2022-10-12"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+ fig.align = "center")
+# Loading in the necessary packages
+pacman::p_load(tidyverse)
+# Reading in the data set
+crashes <- read.csv("F_Crash_ChittendenCty_Aug_2019_2021.csv")
+# Changing roof, result, and field into factors:
+crashes <-
+ crashes |>
+ mutate(across(.cols = c(Crash.Type, Collision.Direction, Weather, 
+                         Time.of.Day, Impairment),
+ .fns = factor))
+
 ```
 
 ## R Markdown
@@ -15,10 +27,9 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-crashes <- read.csv("F_Crash_ChittendenCty_Aug_2019_2021.csv")
+```{r crashes}
 
-head(crashes, 10)
+head(crashes, 1000)
 ```
 
 ## Including Plots
